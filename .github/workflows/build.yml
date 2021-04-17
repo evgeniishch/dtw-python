@@ -44,17 +44,12 @@ jobs:
 
     - name: Generate coverage report
       run: |
-        env
-        pip install pytest
-        pip install pytest-cov
-        pip install -e .
-        pytest --cov=dtw --cov-report=xml
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+        env | sort
+        env > env.xml
+        
+    - uses: actions/upload-artifact@v2
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
+        path: ./env.xml
 
 
 
