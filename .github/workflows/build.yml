@@ -44,6 +44,7 @@ jobs:
 
     - name: Generate coverage report
       run: |
+        env
         pip install pytest
         pip install pytest-cov
         pip install -e .
