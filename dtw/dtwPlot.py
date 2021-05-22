@@ -93,6 +93,9 @@ def dtwPlotTwoWay(d, xts=None, yts=None,
                   match_col="gray",
                   xlab="Index",
                   ylab="Query value",
+                  x_label='X label',
+                  y_label='Y label',
+                  figsize=(15,10),
                   **kwargs):
     # IMPORT_RDOCSTRING dtwPlotTwoWay
     """Plotting of dynamic time warp results: pointwise comparison
@@ -166,6 +169,8 @@ When ``offset`` is set values on the left axis only apply to the query.
     xts = numpy.pad(xts,(0,maxlen-len(xts)),"constant",constant_values=numpy.nan)
     yts = numpy.pad(yts,(0,maxlen-len(yts)),"constant",constant_values=numpy.nan)
 
+    plt.figure(figsize=figsize)
+
     fig, ax = plt.subplots()
     if offset != 0:
         ax2 = ax.twinx()
@@ -173,8 +178,8 @@ When ``offset`` is set values on the left axis only apply to the query.
     else:
         ax2 = ax
 
-    ax.plot(times, xts, color='k', **kwargs)
-    ax2.plot(times, yts, **kwargs)
+    ax.plot(times, xts, color='k', label=x_label,**kwargs)
+    ax2.plot(times, yts, label=y_label, **kwargs)
 
     ql, qh = ax.get_ylim()
     rl, rh = ax2.get_ylim()
